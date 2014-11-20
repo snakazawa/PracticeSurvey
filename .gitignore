@@ -1,0 +1,11 @@
+.idea/
+
+npm-debug.log
+node_modules/
+
+public/javascripts/bower_components/
+
+logs/
+temp_test/
+
+config.json

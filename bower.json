@@ -1,0 +1,21 @@
+{
+    "name": "Practice Survey",
+    "version": "0.0.0",
+    "description": "Practice Survey",
+    "authors": [
+        "s.nakazawa"
+    ],
+    "private": true,
+    "license": "MIT",
+    "ignore": [
+        "**/.*",
+        "node_modules",
+        "bower_components",
+        "test",
+        "tests"
+    ],
+    "dependencies": {
+        "jquery": "~2.1.1",
+        "underscore": "~1.7.0"
+    }
+}
