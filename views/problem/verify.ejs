@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+</head>
+<body>
+
+<h1><%= title %></h1>
+<form method="POST" action="/problem/">
+    <div>
+        <p><label for="name">問題名</label></p>
+        <p id="name-view"><%= name %></p>
+        <input id="name" name="name" type="hidden" placeholder="Problem Name" required />
+    </div>
+
+    <div>
+        <p><label for="content">説明 (MarkDown)</label></p>
+        <p id="content-view"><%= content %></p>
+        <textarea id="content" name="content" rows="10" placeholder="Edit MarkDown" required hidden><%= content %></textarea>
+    </div>
+
+    <div>
+        <p><label for="master-user">作成者 (管理者)</label></p>
+        <p id="master-user-view"><%= master_user %></p>
+    </div>
+
+    <div>
+        <button type="submit">登録する</button>
+    </div>
+</form>
+
+</body>
+</html>

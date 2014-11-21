@@ -1,13 +1,17 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-    <p>id = <%= userId %></p>
-    <a href="/auth/twitter">認証</a>
-  </body>
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+</head>
+<body>
+
+<h1><%= title %></h1>
+<p>Twitter username: <%= username %></p>
+
+<a href="/auth/twitter">Twitterでログインする</a>
+
+<a href="/problem/create">問題作成</a>
+
+</body>
 </html>
