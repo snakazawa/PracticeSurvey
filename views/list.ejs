@@ -13,7 +13,14 @@
 
 <a href="/problem/create">問題作成</a>
 
-<a href="/list">リスト</a>
+<ul>
+    <% problems.forEach(function (problem) { %>
+    <li class="problem">
+        <a href="/problem/view/<%= problem.id %>"><span class="problem-title"><%= problem.name %></span></a>
+    </li>
+
+    <% }); %>
+</ul>
 
 </body>
 </html>

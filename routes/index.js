@@ -1,9 +1,8 @@
 var express = require('express');
 var router = express.Router();
 var app = module.parent.exports;
-var passport = app.get('passport');
 
-/* home. */
+/* home */
 router.get('/', function (req, res) {
     res.render('index', {
         title: 'PracticeSurvey',

@@ -6,10 +6,15 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require("express-session");
+var mongoose = require('mongoose');
 var config = JSON.parse(fs.readFileSync('config.json', 'utf8'));
 
 var app = express();
 module.exports = app;
+
+// mongoose
+var db = mongoose.connect('mongodb://localhost/practiceSurvey');
+var User = require('./lib/model/user');
 
 /*** transport ***/
 var passport = require('passport');
@@ -33,6 +38,7 @@ passport.use(
         consumerSecret: config.twitter.consumerSecret,
         callbackUrl: 'http://127.0.0.1:3000/auth/twitter/callback'
     }, function (token ,tokenSecret, profile, done) {
+        User.login(profile.username);
         process.nextTick(function () {
             return done(null, profile);
         });
@@ -40,9 +46,12 @@ passport.use(
 );
 /*** /transport ***/
 
-var routes = require('./routes/index');
-var auth = require('./routes/auth');
-var problem = require('./routes/problem');
+var routes = {
+    index: require('./routes/index'),
+    auth: require('./routes/auth'),
+    problem: require('./routes/problem'),
+    list:  require('./routes/list')
+};
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -62,17 +71,18 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // routing
-app.use('/', routes);
-app.use('/auth', auth);
+app.use('/', routes.index);
+app.use('/auth', routes.auth);
 // 以下よりログイン必須
 //app.use(function (req, res, next) {
-//    if (app.locals.isLogin(req)) {
-//        next();
-//    } else {
-//        res.redirect('/login?require=1');
-//    }
+    //if (app.locals.isLogin(req)) {
+    //    next();
+    //} else {
+    //    res.redirect('/login?require=1');
+    //}
 //});
-app.use('/problem', problem);
+app.use('/list', routes.list);
+app.use('/problem', routes.problem);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
